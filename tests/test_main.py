@@ -1,7 +1,10 @@
+import sys
+import os
+sys.path.append(os.getcwd())
 import pytest 
 
-from greeting.main import greet   
-from greeting.utils import add   
+from src.greeting.main import greet   
+from src.greeting.utils import add   
 
 def test_greet(): 
     assert greet("World") == "Hello, World!"

@@ -1,0 +1,18 @@
+Automatiser les tests de regression :
+    -Réaliser les tests sur les fonctionnalités et les automatiser avec github action ou gitlab cl par exemple
+
+Suivre les meilleures pratiques de codage
+    -outils de linting (pylint pour python, clang-tidy pour c++, etc...)
+
+Documenter les processus de développement
+    -Docstring auto-formattées (extensions ou copilot par exemple) et génrateur de doc (javadoc pour java)
+
+Utiliser des outils de Linting pour maintenir la qualité du code
+    -outils de linting (pylint pour python, clang-tidy pour c++, etc...)
+
+Effectuer des revues de code entre pairs
+    -github et gitlab pour le review en équipe efficace
+
+Écrire des tests unitaires pour chaque fonctionnalité
+    -faire les test par rapport à ce qui est attendu de la fonction avec template généralement fourni par l'IDE ou les extensions associées (IntelliJ ou ext VScode),
+    executage auto avec github action ou gitlab cl par exemple
