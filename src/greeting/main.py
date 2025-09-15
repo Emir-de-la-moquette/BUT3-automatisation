@@ -14,5 +14,5 @@ def greet(name):
     return f"Hello, {name}!"
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     print(greet("GitLab CI/CD"))
