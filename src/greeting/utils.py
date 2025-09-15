@@ -13,3 +13,16 @@ def add(a, b):
         Value: number a + number b
     """
     return a + b
+
+
+def sub(a, b):
+    """add
+
+    Args:
+        a (Value): number
+        b (Value): number
+
+    Returns:
+        Value: number a + number b
+    """
+    return a - b
