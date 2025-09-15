@@ -1,6 +1,7 @@
 """ Module Main
 """
 
+
 def greet(name):
     """greet
 
@@ -11,6 +12,7 @@ def greet(name):
         String: hello
     """
     return f"Hello, {name}!"
+
 
 if __name__ == "__main__":
     print(greet("GitLab CI/CD"))
