@@ -4,9 +4,9 @@ import sys
 import os
 # import pytest
 sys.path.append(os.getcwd())
-
-from src.greeting.main import greet # pylint: disable=wrong-import-position
-from src.greeting.utils import add, sub # pylint: disable=wrong-import-position
+# pylint: disable=import-error, wrong-import-position
+from src.greeting.main import greet  # noqa
+from src.greeting.utils import add, sub # noqa
 
 
 def test_greet():
