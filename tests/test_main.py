@@ -1,10 +1,10 @@
 import sys
 import os
+# import pytest
 sys.path.append(os.getcwd())
-import pytest 
 
-from src.greeting.main import greet   
-from src.greeting.utils import add   
+from src.greeting.main import greet # pylint: disable=wrong-import-position
+from src.greeting.utils import add # pylint: disable=wrong-import-position
 
 def test_greet():
     """_summary_
