@@ -1,12 +1,12 @@
 """tests
 """
-import sys
-import os
+# import sys
+# import os
+# sys.path.append(os.getcwd())
 # import pytest
-sys.path.append(os.getcwd())
 # pylint: disable=import-error, wrong-import-position
-from src.greeting.main import greet  # noqa
-from src.greeting.utils import add, sub # noqa
+from greeting.main import greet  # noqa
+from greeting.utils import add, sub # noqa
 
 
 def test_greet():
