@@ -1,44 +1,58 @@
-name: Pylint - Pytest
+name: Lint & Tests
 
 on: 
   pull_request:
     branches: master
   push:
 
-
 jobs:
-  build:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint flake8
+
+      - name: Run pylint
+        run: |
+          pylint --fail-under=8 $(git ls-files '*.py')
+
+      - name: Run flake8
+        run: |
+          flake8 .
+
+
+  tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint pytest pytest-cov flake8
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py')
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
 
-    - name: Analysing the code with flake8
-      run: |
-        flake8 .
+      - name: Run unit tests with pytest + coverage
+        env:
+          PYTHONPATH: ./src
+        run: |
+          pytest --cov --cov-fail-under=90 --cov-report=term-missing --cov-report=html
 
-    - name: Run unit tests with pytest + coverage
-      env:
-        PYTHONPATH: ./src
-      run: |
-        pytest --cov --cov-fail-under=90 --cov-report=term-missing --cov-report=html
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-html-${{ matrix.python-version }}
-        path: htmlcov
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html-${{ matrix.python-version }}
+          path: htmlcov
