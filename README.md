@@ -5,5 +5,5 @@ CLERMONT Shanka 31A
 
 ## Contributors
 <a href="https://github.com/Emir-de-la-moquette">
-<img src="https://www.portfolio.shankaclermont.fr/static/images/raciste.png" width="200" height="200" >
+<img src="images/feur.png" width="200" height="200" >
 </a>
