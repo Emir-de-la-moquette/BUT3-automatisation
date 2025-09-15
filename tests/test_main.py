@@ -25,4 +25,3 @@ def test_sub():
     """test 3
     """
     assert sub(69, 32) == 37
-
