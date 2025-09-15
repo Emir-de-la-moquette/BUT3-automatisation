@@ -1,6 +1,7 @@
 """setup
 """
-from setuptools import setup, find_packages
+# pylint: disable=import-error, wrong-import-position
+from setuptools import setup, find_packages #noqa
 
 setup(
     name='my_project',  # Remplacez par le nom de votre projet
