@@ -29,7 +29,7 @@
     - name: Pull des images Docker
       community.docker.docker_compose_v2:
         project_src: "{{ app_directory }}"
-        pull: true
+        pull: always
 
     - name: Lancer les containers Docker
       community.docker.docker_compose_v2:
