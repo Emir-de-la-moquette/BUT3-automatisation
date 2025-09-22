@@ -1,0 +1,1 @@
+ssh -p 62218 -i ~/.ssh/id_ed25519_18 student@dev18.iut.arcanit.io
