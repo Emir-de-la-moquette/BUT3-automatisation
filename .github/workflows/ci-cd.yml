@@ -116,15 +116,5 @@ jobs:
           file: ./frontend/web.dockerfile
           push: true
           tags: |
-            "${{ secrets.DOCKER_ADRESSE }}"/clermont-shanka-frontend:latest
-            "${{ secrets.DOCKER_ADRESSE }}"/clermont-shanka-frontend:${{ github.sha }}
-
-      - name: Build and push backend image
-        uses: docker/build-push-action@v6
-        with:
-          context: ./backend
-          file: ./backend/Dockerfile
-          push: true
-          tags: |
-            "${{ secrets.DOCKER_ADRESSE }}"/clermont-shanka-backend:latest
-            "${{ secrets.DOCKER_ADRESSE }}"/clermont-shanka-backend:${{ github.sha }}
+            ${{ secrets.DOCKER_ADRESSE }}/clermont-shanka-frontend:latest
+            ${{ secrets.DOCKER_ADRESSE }}/clermont-shanka-frontend:${{ github.sha }}
