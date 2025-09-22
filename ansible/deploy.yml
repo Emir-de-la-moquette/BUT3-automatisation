@@ -1,0 +1,39 @@
+---
+- name: Déploiement de l'application avec Docker Compose
+  hosts: apps
+  vars_files:
+    - group_vars/apps.yml
+
+  tasks:
+    - name: Créer le dossier de déploiement
+      file:
+        path: "{{ app_directory }}"
+        state: directory
+
+    - name: Login au registre Docker privé
+      community.docker.docker_login:
+        registry_url: "{{ registry }}"
+        username: "{{ registry_login }}"
+        password: "{{ registry_password }}"
+
+    - name: Copier docker-compose.yml
+      copy:
+        src: docker-compose.yml
+        dest: "{{ app_directory }}/docker-compose.yml"
+
+    - name: Copier backend.env
+      copy:
+        src: backend.env
+        dest: "{{ app_directory }}/backend.env"
+
+    - name: Pull des images Docker
+      community.docker.docker_compose:
+        project_src: "{{ app_directory }}"
+        pull: true
+
+    - name: Lancer les containers Docker
+      community.docker.docker_compose:
+        project_src: "{{ app_directory }}"
+        state: present
+        restarted: true
+        remove_orphans: true

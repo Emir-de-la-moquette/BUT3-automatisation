@@ -119,7 +119,7 @@ jobs:
             ${{ secrets.DOCKER_ADRESSE }}/clermont-shanka-frontend:latest
             ${{ secrets.DOCKER_ADRESSE }}/clermont-shanka-frontend:${{ github.sha }}
 
-            
+
   docker-build-backend:
     runs-on: ubuntu-latest
 
@@ -143,3 +143,30 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_ADRESSE }}/clermont-shanka-backend:latest
             ${{ secrets.DOCKER_ADRESSE }}/clermont-shanka-backend:${{ github.sha }}
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    needs: ['docker-build-backend', 'docker-build-frontend']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Ajouter la clé SSH pour le runner
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH }}
+
+      - name: Installer Ansible et la collection Docker
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip sshpass
+          pip3 install ansible
+          ansible-galaxy collection install community.docker
+
+      - name: Lancer le playbook Ansible pour dev
+        env:
+          image_tag: ${{ github.sha }}
+          registry_password: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          ansible-playbook -i inventory deploy.yml --extra-vars "image_tag=${{ github.sha }} registry_password=${{ secrets.DOCKER_PASSWORD }}"
