@@ -93,7 +93,7 @@ jobs:
           path: htmlcov
 
 
-          
+
 
   docker-build:
     runs-on: ubuntu-latest
@@ -105,14 +105,14 @@ jobs:
 
       # 2. Connexion au registry
       - name: Log in to Docker registry
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login docker.iut.arcanit.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login "${{ secrets.DOCKER_ADRESSE }}" -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       # 3. Build de l’image
       - name: Build Docker image
         run: |
-          docker build -t docker.iut.arcanit.io/mon-projet:latest .
+          docker build -t "${{ secrets.DOCKER_ADRESSE }}"/mon-projet:latest .
 
       # 4. Push de l’image
       - name: Push Docker image
         run: |
-          docker push docker.iut.arcanit.io/mon-projet:latest
+          docker push "${{ secrets.DOCKER_ADRESSE }}"/mon-projet:latest
