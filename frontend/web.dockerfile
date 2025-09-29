@@ -1,5 +1,5 @@
 # Étape 1 : build frontend
-FROM node:18 AS build
+FROM node:latest AS build
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Étape 2 : serveur statique
-FROM ghcr.io/static-web-server/static-web-server:2
+FROM ghcr.io/static-web-server/static-web-server:2 AS runtime
 
 # Copier les fichiers compilés
 COPY --from=build /app/dist /app
