@@ -26,14 +26,12 @@
         src: backend.env
         dest: "{{ app_directory }}/backend.env"
 
-    - name: Pull des images Docker
-      community.docker.docker_compose_v2:
-        project_src: "{{ app_directory }}"
-        pull: always
+    - name: Pull les images Docker
+      command:
+        cmd: "docker compose pull"
+        chdir: "{{ app_directory }}"
 
-    - name: Lancer les containers Docker
-      community.docker.docker_compose_v2:
-        project_src: "{{ app_directory }}"
-        state: present
-        restarted: true
-        remove_orphans: true
+    - name: Start les containers Docker
+      command:
+        cmd: "docker compose up -d --remove-orphans"
+        chdir: "{{ app_directory }}"
