@@ -18,9 +18,11 @@
         password: "{{ registry_password }}"
 
     - name: Copier docker-compose.yml
-      copy:
+      template:
         src: docker-compose.yml
         dest: "{{ app_directory }}/docker-compose.yml"
+      vars:
+        env: "{{ env }}"
 
     - name: Copier backend.env
       copy:

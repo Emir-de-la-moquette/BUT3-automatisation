@@ -66,14 +66,14 @@ jobs:
     secrets: inherit
 
   deploy-test:
-    needs: ['docker-build-backend', 'docker-build-frontend']
+    needs: ['docker-build-backend', 'docker-build-frontend', 'deploy-dev']
     uses: ./.github/workflows/deploy.yml
     with:
       environment: test
     secrets: inherit
 
   deploy-prod:
-    needs: ['docker-build-backend', 'docker-build-frontend']
+    needs: ['docker-build-backend', 'docker-build-frontend', 'deploy-dev', 'deploy-test']
     uses: ./.github/workflows/deploy.yml
     with:
       environment: prod

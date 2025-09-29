@@ -1,27 +1,27 @@
 services:
   clermont-shanka-frontend:
     image: docker.iut.arcanit.io/clermont-shanka-frontend:latest
-    container_name: clermont-shanka-frontend
+    container_name: clermont-shanka-frontend-{{ env }}
     restart: always
     networks: [traefik]
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dev-clermont-shanka-frontend.rule=Host(`dev-clermont-shanka.iut.arcanit.io`)"
-      - "traefik.http.routers.dev-clermont-shanka-frontend.entrypoints=https"
-      - "traefik.http.routers.dev-clermont-shanka-frontend.tls=true"
-      - "traefik.http.services.dev-clermont-shanka-frontend.loadbalancer.server.port=80"
+      - "traefik.http.routers.{{ env }}-clermont-shanka-frontend.rule=Host(`{{ env }}-clermont-shanka.iut.arcanit.io`)"
+      - "traefik.http.routers.{{ env }}-clermont-shanka-frontend.entrypoints=https"
+      - "traefik.http.routers.{{ env }}-clermont-shanka-frontend.tls=true"
+      - "traefik.http.services.{{ env }}-clermont-shanka-frontend.loadbalancer.server.port=80"
 
   clermont-shanka-backend:
     image: docker.iut.arcanit.io/clermont-shanka-backend:latest
-    container_name: clermont-shanka-backend
+    container_name: clermont-shanka-backend-{{ env }}
     restart: always
     networks: [traefik]
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dev-clermont-shanka-backend.rule=Host(`api-dev-clermont-shanka.iut.arcanit.io`)"
-      - "traefik.http.routers.dev-clermont-shanka-backend.entrypoints=https"
-      - "traefik.http.routers.dev-clermont-shanka-backend.tls=true"
-      - "traefik.http.services.dev-clermont-shanka-backend.loadbalancer.server.port=80"
+      - "traefik.http.routers.{{ env }}-clermont-shanka-backend.rule=Host(`api-{{ env }}-clermont-shanka.iut.arcanit.io`)"
+      - "traefik.http.routers.{{ env }}-clermont-shanka-backend.entrypoints=https"
+      - "traefik.http.routers.{{ env }}-clermont-shanka-backend.tls=true"
+      - "traefik.http.services.{{ env }}-clermont-shanka-backend.loadbalancer.server.port=80"
     env_file:
       - ./backend.env
 
