@@ -7,7 +7,7 @@
   tasks:
     - name: Créer le dossier de déploiement
       file:
-        path: "{{ app_directory }}"
+        path: "{{ app_directory }}-{{ env }}"
         state: directory
 
     - name: Login au registre Docker privé
@@ -27,16 +27,16 @@
     - name: Copier backend.env
       template:
         src: backend.env.j2
-        dest: "{{ app_directory }}/backend.env"
+        dest: "{{ app_directory }}-{{ env }}/backend.env"
       vars:
         env: "{{ env }}"
 
     - name: Pull les images Docker
       command:
         cmd: "docker compose pull"
-        chdir: "{{ app_directory }}"
+        chdir: "{{ app_directory }}-{{ env }}"
 
     - name: Start les containers Docker
       command:
         cmd: "docker compose up -d --remove-orphans"
-        chdir: "{{ app_directory }}"
+        chdir: "{{ app_directory }}-{{ env }}"
