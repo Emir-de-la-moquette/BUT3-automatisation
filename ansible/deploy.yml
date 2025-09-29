@@ -25,9 +25,11 @@
         env: "{{ env }}"
 
     - name: Copier backend.env
-      copy:
-        src: backend.env
+      template:
+        src: backend.env.j2
         dest: "{{ app_directory }}/backend.env"
+      vars:
+        env: "{{ env }}"
 
     - name: Pull les images Docker
       command:

@@ -1,5 +1,5 @@
 services:
-  clermont-shanka-frontend:
+  clermont-shanka-frontend-{{ env }}:
     image: docker.iut.arcanit.io/clermont-shanka-frontend:latest
     container_name: clermont-shanka-frontend-{{ env }}
     restart: always
@@ -11,7 +11,7 @@ services:
       - "traefik.http.routers.{{ env }}-clermont-shanka-frontend.tls=true"
       - "traefik.http.services.{{ env }}-clermont-shanka-frontend.loadbalancer.server.port=80"
 
-  clermont-shanka-backend:
+  clermont-shanka-backend-{{ env }}:
     image: docker.iut.arcanit.io/clermont-shanka-backend:latest
     container_name: clermont-shanka-backend-{{ env }}
     restart: always
