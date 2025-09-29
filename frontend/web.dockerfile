@@ -19,9 +19,6 @@ RUN npm run build
 FROM ghcr.io/static-web-server/static-web-server:2 AS runtime
 
 # Copier les fichiers compilés
-COPY --from=build /app/dist /app
+COPY --from=build /app/dist /public
 
 EXPOSE 80
-
-# Lancer le serveur statique sur /app
-CMD ["static-web-server", "--port", "80", "--root", "/app"]
