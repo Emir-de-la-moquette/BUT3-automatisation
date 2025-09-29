@@ -6,9 +6,6 @@ on:
       environment:
         required: true
         type: string
-      inventory:
-        required: true
-        type: string
     secrets:
       SSH:
         required: true
@@ -31,7 +28,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p 62218 dev18.iut.arcanit.io >> ~/.ssh/known_hosts
+          ssh-keyscan -p 62218 ${{ secrets.DOCKER_ADRESSE }} >> ~/.ssh/known_hosts
 
       - name: Installer Ansible et la collection Docker
         run: |
@@ -41,5 +38,5 @@ jobs:
       - name: Lancer le playbook
         run: |
           cd ansible/
-          ansible-playbook -i ${{ inputs.inventory }} deploy.yml \
+          ansible-playbook -i inventory.ini deploy.yml \
             --extra-vars "env=${{ inputs.environment }} image_tag=${{ github.sha }} registry_password=${{ secrets.DOCKER_PASSWORD }}"
