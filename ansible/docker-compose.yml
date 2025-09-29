@@ -11,6 +11,18 @@ services:
       - "traefik.http.routers.dev-clermont-shanka-frontend.tls=true"
       - "traefik.http.services.dev-clermont-shanka-frontend.loadbalancer.server.port=80"
 
+  clermont-shanka-backend:
+    image: docker.iut.arcanit.io/clermont-shanka-backend:latest
+    container_name: clermont-shanka-backend
+    restart: always
+    networks: [traefik]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dev-clermont-shanka-backend.rule=Host(`dev-clermont-shanka.iut.arcanit.io`)"
+      - "traefik.http.routers.dev-clermont-shanka-backend.entrypoints=https"
+      - "traefik.http.routers.dev-clermont-shanka-backend.tls=true"
+      - "traefik.http.services.dev-clermont-shanka-backend.loadbalancer.server.port=80"
+
 networks:
   traefik:
     external: true
