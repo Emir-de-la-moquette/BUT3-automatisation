@@ -11,8 +11,9 @@
         state: directory
 
     - name: Login au registre Docker privé
-      community.docker.docker_login:
-        registry_url: "{{ registry }}"
+      # community.docker.docker_login:
+      docker_login:
+        registry: "{{ registry }}"
         username: "{{ registry_login }}"
         password: "{{ registry_password }}"
 
