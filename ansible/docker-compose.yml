@@ -1,7 +1,7 @@
 services:
   shanka-clermont-frontend:
     container_name: shanka-clermont-frontend
-    image: docker.iut.arcanit.io/dev-shanka-clermont-frontend:latest
+    image: docker.iut.arcanit.io/shanka-clermont-frontend:latest
     restart: always
     networks: [traefik]
     labels:
