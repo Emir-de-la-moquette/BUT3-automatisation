@@ -12,6 +12,7 @@ RUN npm install
 # Copier le reste du code
 COPY . .
 
+
 # Construire l'application
 RUN npm run build
 
@@ -21,4 +22,15 @@ FROM ghcr.io/static-web-server/static-web-server:2 AS runtime
 # Copier les fichiers compilés
 COPY --from=build /app/dist /public
 
-EXPOSE 80
+# EXPOSE 80
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+# FROM nginx:alpine
+
+# # Copier le frontend compilé
+# COPY --from=build /app/dist /usr/share/nginx/html
