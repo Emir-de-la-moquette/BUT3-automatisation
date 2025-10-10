@@ -6,7 +6,9 @@ registry_password: secret # This will be overriden from GitHub secrets
 
 image_tag: latest
 
-aspnetcore_env:
-  dev: dev
-  test: test
-  prod: prod
+#aspnetcore_env:
+#  dev: dev
+#  test: test
+#  prod: prod 
+
+aspnetcore_env: "{{ env }}"

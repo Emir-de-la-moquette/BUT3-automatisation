@@ -80,10 +80,10 @@ jobs:
     secrets: inherit
 
   deploy-pr:
+    needs: ['docker-build-backend', 'docker-build-frontend']
     if: ${{ github.event_name == 'pull_request' }}
     name: deploy pull request
     secrets: inherit
     uses: ./.github/workflows/deploy-action.yml
     with:
       environment: pr-${{ github.event.pull_request.number }}
-      # tkt
